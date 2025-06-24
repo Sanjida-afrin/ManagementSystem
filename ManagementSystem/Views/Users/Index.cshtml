@@ -34,7 +34,6 @@
                 <th>#</th>
                 <th>Full Name</th>
                 <th>Role</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -53,10 +52,7 @@
                         <td>@count</td>
                         <td>@($"{user.FirstName} {user.LastName}")</td>
                         <td>@user.Role</td>
-                        <td>
-                            <a class="btn btn-info btn-sm text-white disabled"><i class="bi bi-eye"></i> View</a>
-                            <a class="btn btn-danger btn-sm text-white disabled"><i class="bi bi-trash"></i> Delete</a>
-                        </td>
+                        
                     </tr>
                     count++;
                 }
