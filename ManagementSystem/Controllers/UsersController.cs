@@ -1,22 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc;
-using ManagementSystem.Data;
 
-public class UserController : Controller
+public class UsersController : Controller
 {
-    private readonly AppDbContext _userService;
 
-    public UserController()
-    {
-        _userService = new AppDbContext(unitOfWork);
-    }
+   
+        private readonly AppDbContext _context;
 
-    public IActionResult Index(string role)
-    {
-        var roles = new List<string> { "Admin", "Manager", "Salesman" };
-        ViewBag.Roles = new SelectList(roles);
+        public UsersController(AppDbContext context)
+        {
+            _context = context;
+        }
 
-        var users = _userService.GetUsers(role);
-        return View(users);
-    }
+        public IActionResult Index(string role)
+        {
+            // Send the roles to the view for dropdown
+            var roles = new List<string> { "Admin", "Manager", "Salesman" };
+            ViewBag.Roles = roles;
+
+            // Filter users by role
+            var users = string.IsNullOrEmpty(role)
+                ? _context.Users.ToList()
+                : _context.Users.Where(u => u.Role == role).ToList();
+
+            return View(users);
+        }
+   
 }
