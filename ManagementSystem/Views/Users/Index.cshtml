@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ManagementSystem.Models.Users>
+
+<table>
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@($"{user.FirstName} {user.LastName}")</td>
+            <td>@user.Role</td>
+        </tr>
+    }
+    </tbody>
+</table>
